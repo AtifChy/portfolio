@@ -1,0 +1,83 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="border-t border-white/10 bg-[#090a0f]/80 backdrop-blur-md mt-24 py-12 text-neutral-400 text-sm">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-white/5">
+      <!-- Left Info -->
+      <div class="space-y-1 text-center md:text-left">
+        <div class="flex items-center justify-center md:justify-start gap-2.5">
+          <span class="font-serif font-bold text-base text-neutral-100">
+            Md. Iftakhar Awal Chowdhury
+          </span>
+          <span class="text-xs px-2 py-0.5 rounded-md bg-blue-500/10 text-blue-400 font-mono border border-blue-500/20">
+            Dhaka
+          </span>
+        </div>
+        <p class="text-xs text-neutral-400">
+          Building high-performance systems software, native desktop apps, and ML solutions.
+        </p>
+      </div>
+
+      <!-- Social & Direct Links -->
+      <div class="flex flex-wrap items-center justify-center gap-4 text-xs font-mono">
+        <a
+          href="https://github.com/AtifChy"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex items-center gap-1.5 hover:text-white transition-colors"
+        >
+          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+          </svg>
+          GitHub
+        </a>
+
+        <a
+          href="https://linkedin.com/in/iftakhar-awal"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex items-center gap-1.5 hover:text-white transition-colors"
+        >
+          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+          </svg>
+          LinkedIn
+        </a>
+
+        <a
+          href="mailto:iftakhar.awal@gmail.com"
+          class="flex items-center gap-1.5 hover:text-white transition-colors"
+        >
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+          </svg>
+          Email
+        </a>
+
+        <a
+          href="/resume.pdf"
+          target="_blank"
+          class="flex items-center gap-1.5 text-blue-400 hover:text-blue-300 transition-colors"
+        >
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+          </svg>
+          Resume
+        </a>
+      </div>
+    </div>
+
+    <!-- Bottom Attribution -->
+    <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-neutral-400">
+      <p>© {currentYear} Md. Iftakhar Awal Chowdhury. All rights reserved.</p>
+      <p class="flex items-center gap-1.5">
+        <span>Engineered with</span>
+        <span class="font-mono text-neutral-300">Astro 7</span>
+        <span>•</span>
+        <span class="font-mono text-neutral-300">Tailwind v4</span>
+      </p>
+    </div>
+  </div>
+</footer>

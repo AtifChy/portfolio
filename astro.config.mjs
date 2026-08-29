@@ -1,10 +1,15 @@
 // @ts-check
 
-import react from '@astrojs/react';
-import { defineConfig } from 'astro/config';
+import react from "@astrojs/react";
+import { defineConfig } from "astro/config";
+import tailwindcss from "@tailwindcss/vite";
+import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
-	// Enable React to support React JSX components.
-	integrations: [react()],
+  site: "https://atifchy.github.io",
+  integrations: [react(), sitemap()],
+  vite: {
+    plugins: [tailwindcss()],
+  },
 });

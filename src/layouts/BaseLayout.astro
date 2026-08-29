@@ -1,0 +1,114 @@
+---
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  canonicalUrl?: string;
+  type?: "website" | "article";
+}
+
+const {
+  title = "Md. Iftakhar Awal Chowdhury (@AtifChy) — Systems & ML Software Engineer",
+  description = "Portfolio of Md. Iftakhar Awal Chowdhury (@AtifChy) — Computer Science student building systems software, native desktop applications, developer tools, and machine learning systems with Go, TypeScript, React, and Rust.",
+  image = "/og-image.png",
+  canonicalUrl = Astro.url.href,
+  type = "website",
+} = Astro.props;
+
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Md. Iftakhar Awal Chowdhury",
+  alternateName: "AtifChy",
+  url: "https://github.com/AtifChy",
+  sameAs: [
+    "https://github.com/AtifChy",
+    "https://linkedin.com/in/iftakhar-awal",
+  ],
+  jobTitle: "Software Engineer & CS Student",
+  worksFor: {
+    "@type": "EducationalOrganization",
+    name: "American International University-Bangladesh",
+  },
+  alumniOf: [
+    {
+      "@type": "EducationalOrganization",
+      name: "American International University-Bangladesh",
+    },
+    {
+      "@type": "EducationalOrganization",
+      name: "SCHOLARSHOME",
+    },
+  ],
+  knowsAbout: [
+    "Go",
+    "Rust",
+    "TypeScript",
+    "React",
+    "Python",
+    "Machine Learning",
+    "FastAPI",
+    "Wails",
+    "SQLite",
+    "ASP.NET Core",
+    "Systems Software",
+  ],
+};
+---
+
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content={type} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalUrl} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={image} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+    <!-- Theme Initialization Script (Avoids Flash of Unstyled Content) -->
+    <script is:inline>
+      (function () {
+        const stored = localStorage.getItem("theme");
+        if (stored === "light") {
+          document.documentElement.classList.add("light");
+          document.documentElement.classList.remove("dark");
+        } else {
+          document.documentElement.classList.add("dark");
+          document.documentElement.classList.remove("light");
+        }
+      })();
+    </script>
+
+    <!-- Structured Data JSON-LD -->
+    <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+  </head>
+  <body class="min-h-screen flex flex-col bg-radial-glow antialiased selection:bg-blue-600 selection:text-white">
+    <Header />
+    <main class="flex-1 w-full max-w-6xl mx-auto px-4 sm:px-6 pt-6 sm:pt-10">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

@@ -1,0 +1,65 @@
+---
+const milestones = [
+  {
+    period: "2024 — Present",
+    title: "Systems Software, AI & Native Tooling",
+    role: "Open Source Creator & Software Engineer",
+    description:
+      "Engineered cross-platform desktop applications (AIUB Companion using Go & Wails v3), authored native Rust Windows notification libraries (winrt-toast-reborn), and developed semantic resume matching pipelines using FastAPI and SentenceTransformers.",
+    tags: ["Go", "Rust", "Wails v3", "FastAPI", "React 19", "SQLite"],
+  },
+  {
+    period: "2023 — 2024",
+    title: "Enterprise Web Systems & Database Architecture",
+    role: "Fullstack Developer & Undergraduate Researcher",
+    description:
+      "Architected layered .NET 10 MVC hospital management systems with Entity Framework Core and SQL Server; engineered multi-vendor e-commerce platforms with normalized relational databases; maintained Dean's Honor list at AIUB with 3.83 CGPA.",
+    tags: ["C#", ".NET 10", "ASP.NET Core", "EF Core", "SQL Server", "PHP"],
+  },
+  {
+    period: "2020 — 2022",
+    title: "Linux Environments & Open Source Engineering",
+    role: "Open Source Contributor & Systems Enthusiast",
+    description:
+      "Crafted declarative tiling window manager configurations in Haskell (xmonad — 66+ stars on GitHub), pioneered Git-bare dotfiles automation patterns, and earned GPA 5.00 in Higher Secondary Science curriculum.",
+    tags: ["Haskell", "X11", "Linux", "Shell", "Neovim", "Chezmoi"],
+  },
+];
+---
+
+<div class="relative border-l border-white/10 ml-4 sm:ml-6 space-y-8 my-8">
+  {milestones.map((item) => (
+    <div class="relative pl-6 sm:pl-8 group">
+      <!-- Dot on the timeline -->
+      <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-[#090a0f] border-2 border-blue-500 group-hover:scale-125 group-hover:border-cyan-400 group-hover:bg-blue-600 transition-all duration-200"></div>
+
+      <!-- Content Box -->
+      <div class="glass-panel rounded-2xl p-5 sm:p-6 border border-white/10 hover:border-blue-500/30 transition-all">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-2">
+          <span class="text-xs font-mono text-blue-400 font-semibold tracking-wide">
+            {item.period}
+          </span>
+          <span class="text-xs text-neutral-400 font-mono">
+            {item.role}
+          </span>
+        </div>
+
+        <h4 class="text-lg font-serif font-bold text-white mb-2 group-hover:text-blue-300 transition-colors">
+          {item.title}
+        </h4>
+
+        <p class="text-sm text-neutral-400 leading-relaxed mb-4">
+          {item.description}
+        </p>
+
+        <div class="flex flex-wrap gap-1.5">
+          {item.tags.map((t) => (
+            <span class="px-2 py-0.5 rounded-md text-[11px] font-mono bg-white/5 border border-white/10 text-neutral-300">
+              {t}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+  ))}
+</div>

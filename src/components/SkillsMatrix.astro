@@ -1,0 +1,102 @@
+---
+const skillCategories = [
+  {
+    title: "Systems & Native Engineering",
+    description: "Low-level performance, native desktop applications, and concurrent daemons",
+    color: "blue",
+    skills: [
+      { name: "Go", level: "Advanced", desc: "Goroutines, net/http, atomic, sqlc" },
+      { name: "Rust", level: "Intermediate", desc: "Memory safety, WinRT APIs, crates" },
+      { name: "Wails v3", level: "Advanced", desc: "Native Go + React IPC bridge" },
+      { name: "C / C++", level: "Proficient", desc: "OpenGL, CMake, memory layout" },
+      { name: "C# / .NET", level: "Proficient", desc: ".NET 10, ASP.NET Core, EF Core" },
+    ],
+  },
+  {
+    title: "Applied AI & Machine Learning",
+    description: "Semantic search, vector embeddings, and LLM inference pipelines",
+    color: "cyan",
+    skills: [
+      { name: "Python", level: "Advanced", desc: "NumPy, Pandas, Document extraction" },
+      { name: "SentenceTransformers", level: "Proficient", desc: "Dense 384-d semantic embeddings" },
+      { name: "FastAPI", level: "Advanced", desc: "Async REST APIs, Uvicorn streaming" },
+      { name: "Ollama / Local LLM", level: "Proficient", desc: "Structured JSON CV parsing" },
+      { name: "PyTorch", level: "Familiar", desc: "Neural networks & tensor ops" },
+    ],
+  },
+  {
+    title: "Frontend & Fullstack Web",
+    description: "Zero-JS static architectures, reactive SPAs, and responsive design systems",
+    color: "emerald",
+    skills: [
+      { name: "React 19 / Vite", level: "Advanced", desc: "Hooks, TanStack Query, Zustand" },
+      { name: "TypeScript / JS", level: "Advanced", desc: "Strict typing, ESNext features" },
+      { name: "Astro 7", level: "Advanced", desc: "Content Layer, SSG, Islands" },
+      { name: "Tailwind CSS v4", level: "Advanced", desc: "Design tokens, glassmorphism, responsive" },
+      { name: "PHP / MySQL", level: "Proficient", desc: "Relational 3NF schemas, MVC architecture" },
+    ],
+  },
+  {
+    title: "Databases & Storage",
+    description: "Relational persistence, full-text indexes, and type-safe query generators",
+    color: "amber",
+    skills: [
+      { name: "SQLite + FTS5", level: "Advanced", desc: "Embedded storage, full-text virtual tables" },
+      { name: "PostgreSQL", level: "Proficient", desc: "Indexing, relational queries, migrations" },
+      { name: "SQL Server", level: "Proficient", desc: "Enterprise schema design, EF Core" },
+      { name: "MySQL", level: "Proficient", desc: "Prepared statements, transaction ACID" },
+    ],
+  },
+  {
+    title: "Developer Tooling & Environments",
+    description: "Linux systems, custom tiling window managers, and automated CI/CD",
+    color: "purple",
+    skills: [
+      { name: "Neovim & Chezmoi", level: "Advanced", desc: "Custom Lua configs, dotfiles automation" },
+      { name: "Docker", level: "Proficient", desc: "Containerized builds, multi-stage images" },
+      { name: "Git & GitHub Actions", level: "Advanced", desc: "CI/CD pipelines, release automation" },
+      { name: "Shell & Zsh", level: "Advanced", desc: "POSIX scripting, CLI utilities" },
+      { name: "Bun / pnpm", level: "Advanced", desc: "Modern JavaScript runtimes & package managers" },
+    ],
+  },
+];
+---
+
+<div class="space-y-6 my-8">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+    {skillCategories.map((cat) => (
+      <div class="glass-panel rounded-2xl p-6 flex flex-col justify-between border border-white/10 hover:border-blue-500/30 transition-all">
+        <div>
+          <!-- Header -->
+          <div class="mb-4">
+            <h4 class="font-serif font-bold text-lg text-white mb-1">
+              {cat.title}
+            </h4>
+            <p class="text-xs text-neutral-400">
+              {cat.description}
+            </p>
+          </div>
+
+          <!-- Skills list with context -->
+          <div class="space-y-2.5">
+            {cat.skills.map((skill) => (
+              <div class="p-2.5 rounded-xl bg-white/[0.03] border border-white/5 hover:bg-white/[0.06] transition-colors">
+                <div class="flex items-center justify-between text-xs mb-1">
+                  <span class="font-mono font-semibold text-neutral-200">
+                    {skill.name}
+                  </span>
+                  <span class="text-[10px] font-mono px-2 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">
+                    {skill.level}
+                  </span>
+                </div>
+                <p class="text-[11px] text-neutral-400 font-mono line-clamp-1">
+                  {skill.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>

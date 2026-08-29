@@ -1,0 +1,21 @@
+---
+interface Props {
+  name: string;
+  size?: "sm" | "md";
+  class?: string;
+}
+
+const { name, size = "md", class: customClass = "" } = Astro.props;
+
+const sizeClasses = {
+  sm: "px-2 py-0.5 text-[11px]",
+  md: "px-2.5 py-1 text-xs",
+};
+---
+
+<span
+  class={`inline-flex items-center gap-1.5 rounded-lg font-mono font-medium border border-white/10 bg-white/5 text-neutral-300 transition-all duration-150 hover:border-white/25 hover:text-white ${sizeClasses[size]} ${customClass}`}
+>
+  <span class="w-1.5 h-1.5 rounded-full bg-blue-400 opacity-80"></span>
+  <span>{name}</span>
+</span>

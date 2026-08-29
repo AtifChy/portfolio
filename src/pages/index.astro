@@ -1,38 +1,217 @@
 ---
-// Component Imports
-import Counter from '../components/Counter';
+import BaseLayout from "../layouts/BaseLayout.astro";
+import GitHubStatsStrip from "../components/GitHubStatsStrip.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import AcademicHonors from "../components/AcademicHonors.astro";
+import SkillsMatrix from "../components/SkillsMatrix.astro";
+import ExperienceTimeline from "../components/ExperienceTimeline.astro";
+import AvailabilityBadge from "../components/AvailabilityBadge.astro";
+import CopyEmailButton from "../components/CopyEmailButton";
+import { getGitHubData } from "../lib/github";
+import { getCollection } from "astro:content";
 
-const someProps = {
-	count: 0,
-};
+// Fetch live GitHub stats and repositories
+const githubData = await getGitHubData();
 
-// Full Astro Component Syntax:
-// https://docs.astro.build/basics/astro-components/
+// Fetch case studies from Content Collections
+const projectsCollection = await getCollection("projects");
+const sortedProjects = projectsCollection.sort(
+  (a, b) => a.data.order - b.data.order
+);
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<style>
-			html,
-			body {
-				font-family: system-ui;
-				margin: 0;
-			}
-			body {
-				padding: 2rem;
-			}
-		</style>
-	</head>
-	<body>
-		<main>
-			<Counter {...someProps} client:visible>
-				<h1>Hello, React!</h1>
-			</Counter>
-		</main>
-	</body>
-</html>
+<BaseLayout>
+  <!-- HERO SECTION -->
+  <section class="py-12 sm:py-16 md:py-20 relative">
+    <div class="max-w-4xl space-y-6">
+      <!-- Status pill -->
+      <div class="flex items-center gap-3">
+        <AvailabilityBadge />
+        <span class="hidden sm:inline text-xs font-mono text-neutral-400">
+          • Dhaka, Bangladesh
+        </span>
+      </div>
+
+      <!-- Main Heading -->
+      <div class="space-y-3">
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-serif font-bold text-white tracking-tight leading-[1.1]">
+          Building <span class="text-gradient-cyan">systems software</span>, native desktop tools, &amp; <span class="text-gradient-emerald">applied AI</span>.
+        </h1>
+        <p class="text-lg sm:text-xl text-neutral-300 font-sans max-w-2xl leading-relaxed">
+          I'm <strong class="text-white font-semibold">Md. Iftakhar Awal Chowdhury</strong> (@AtifChy) — a Computer Science undergraduate student crafting high-performance tools with <span class="text-blue-400 font-mono">Go</span>, <span class="text-amber-400 font-mono">Rust</span>, <span class="text-cyan-400 font-mono">TypeScript</span>, and <span class="text-emerald-400 font-mono">Python/ML</span>.
+        </p>
+      </div>
+
+      <!-- Quick Action Buttons & Interactive Email Pill -->
+      <div class="flex flex-wrap items-center gap-3 pt-2">
+        <a
+          href="#projects"
+          class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-medium text-sm bg-linear-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 transition-all duration-200"
+        >
+          <span>Explore Projects</span>
+          <span>↓</span>
+        </a>
+
+        <a
+          href="/resume.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-medium text-sm border border-white/15 bg-white/5 hover:bg-white/10 text-neutral-200 hover:text-white transition-all duration-200"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          <span>Download Resume (PDF)</span>
+        </a>
+
+        <CopyEmailButton client:idle email="iftakhar.awal@gmail.com" variant="pill" />
+      </div>
+    </div>
+
+    <!-- LIVE GITHUB METRICS STRIP -->
+    <GitHubStatsStrip data={githubData} />
+  </section>
+
+  <!-- FEATURED PROJECTS BENTO GRID -->
+  <section id="projects" class="py-12 scroll-mt-20">
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+      <div>
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono bg-blue-500/10 text-blue-400 border border-blue-500/20 mb-2">
+          ⚡ FLAGSHIP WORK
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-serif font-bold text-white">
+          Featured Projects &amp; Case Studies
+        </h2>
+      </div>
+      <a
+        href="/projects"
+        class="inline-flex items-center gap-1.5 text-sm font-mono text-blue-400 hover:text-blue-300 transition-colors"
+      >
+        <span>View all {githubData.repos.length} repos</span>
+        <span>→</span>
+      </a>
+    </div>
+
+    <!-- Bento Grid of Projects -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+      {sortedProjects.map((p) => {
+        // Find real stars from githubData
+        const repoMatch = githubData.repos.find(
+          (r) => r.name.toLowerCase() === p.id.replace(".md", "").toLowerCase()
+        );
+        const starCount = repoMatch ? repoMatch.stars : undefined;
+
+        return (
+          <ProjectCard
+            title={p.data.title}
+            tagline={p.data.tagline}
+            description={p.data.description}
+            category={p.data.category}
+            period={p.data.period}
+            stack={p.data.stack}
+            slug={p.id.replace(".md", "")}
+            githubUrl={p.data.githubUrl}
+            liveUrl={p.data.liveUrl}
+            stars={starCount}
+            stats={p.data.stats}
+            featured={p.data.featured}
+          />
+        );
+      })}
+    </div>
+  </section>
+
+  <!-- ACADEMICS & RESEARCH HONORS -->
+  <section id="academics" class="py-12 scroll-mt-20">
+    <div class="mb-4">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 mb-2">
+        🏛️ ACADEMIC RIGOR
+      </div>
+      <h2 class="text-3xl sm:text-4xl font-serif font-bold text-white">
+        Education &amp; Academic Honors
+      </h2>
+      <p class="text-sm text-neutral-400 mt-1">
+        Undergraduate coursework in computer systems, algorithms, and artificial intelligence.
+      </p>
+    </div>
+
+    <AcademicHonors />
+  </section>
+
+  <!-- SKILLS MATRIX -->
+  <section id="skills" class="py-12 scroll-mt-20">
+    <div class="mb-4">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 mb-2">
+        🛠️ TECHNICAL CAPABILITIES
+      </div>
+      <h2 class="text-3xl sm:text-4xl font-serif font-bold text-white">
+        Skills in Context
+      </h2>
+      <p class="text-sm text-neutral-400 mt-1">
+        Organized by actual engineering domains rather than arbitrary percentage bars.
+      </p>
+    </div>
+
+    <SkillsMatrix />
+  </section>
+
+  <!-- EXPERIENCE & MILESTONES -->
+  <section id="experience" class="py-12 scroll-mt-20">
+    <div class="mb-4">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono bg-purple-500/10 text-purple-400 border border-purple-500/20 mb-2">
+        ⏳ TIMELINE &amp; JOURNEY
+      </div>
+      <h2 class="text-3xl sm:text-4xl font-serif font-bold text-white">
+        Milestones &amp; Experience
+      </h2>
+      <p class="text-sm text-neutral-400 mt-1">
+        Key checkpoints in software engineering, open source leadership, and systems development.
+      </p>
+    </div>
+
+    <ExperienceTimeline />
+  </section>
+
+  <!-- GET IN TOUCH / CONTACT SECTION -->
+  <section id="contact" class="py-16 scroll-mt-20">
+    <div class="glass-panel rounded-3xl p-8 sm:p-12 relative overflow-hidden border border-white/10 text-center max-w-3xl mx-auto space-y-6">
+      <div class="w-16 h-16 rounded-2xl bg-blue-600/20 border border-blue-500/30 flex items-center justify-center mx-auto text-blue-400">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+        </svg>
+      </div>
+
+      <div class="space-y-2">
+        <h2 class="text-3xl sm:text-4xl font-serif font-bold text-white">
+          Let's build something extraordinary together.
+        </h2>
+        <p class="text-neutral-300 text-sm max-w-xl mx-auto leading-relaxed">
+          I'm actively seeking software engineering internships, systems programming roles, and machine learning opportunities. Feel free to reach out directly!
+        </p>
+      </div>
+
+      <div class="flex flex-wrap items-center justify-center gap-4 pt-2">
+        <a
+          href="mailto:iftakhar.awal@gmail.com"
+          class="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 transition-all duration-200"
+        >
+          <span>Send Direct Email</span>
+          <span>→</span>
+        </a>
+
+        <CopyEmailButton client:idle email="iftakhar.awal@gmail.com" />
+      </div>
+
+      <div class="pt-4 flex items-center justify-center gap-6 text-xs font-mono text-neutral-400">
+        <span class="flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          Fast Response (&lt; 24h)
+        </span>
+        <span>•</span>
+        <span>Dhaka, Bangladesh</span>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

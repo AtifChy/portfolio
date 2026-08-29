@@ -1,0 +1,106 @@
+---
+import ThemeToggle from "./ThemeToggle";
+---
+
+<header class="sticky top-0 z-50 w-full glass-nav transition-all duration-300">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+    <!-- Brand Logo -->
+    <a href="/" class="flex items-center gap-3 group">
+      <!-- <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-600 via-indigo-600 to-cyan-500 p-[1px] shadow-lg shadow-blue-500/20 group-hover:scale-105 transition-transform duration-300"> -->
+      <!--   <div class="w-full h-full bg-[#090a0f] rounded-[11px] flex items-center justify-center"> -->
+      <!--     <span class="font-mono font-bold text-sm text-gradient-cyan">AC</span> -->
+      <!--   </div> -->
+      <!-- </div> -->
+      <div class="flex flex-col">
+        <span class="font-serif font-bold text-sm tracking-tight text-neutral-100 group-hover:text-blue-400 transition-colors">
+          Md. Iftakhar Awal Chowdhury
+        </span>
+        <span class="text-[11px] font-mono text-neutral-400">
+          @AtifChy
+        </span>
+      </div>
+    </a>
+
+    <!-- Desktop Navigation Links -->
+    <nav class="hidden md:flex items-center gap-1.5 text-sm font-medium text-neutral-300">
+      <a href="/#projects" class="px-3 py-1.5 rounded-lg hover:text-white hover:bg-white/5 transition-all">
+        Projects
+      </a>
+      <a href="/projects" class="px-3 py-1.5 rounded-lg hover:text-white hover:bg-white/5 transition-all text-blue-400">
+        All Repos
+      </a>
+      <a href="/#academics" class="px-3 py-1.5 rounded-lg hover:text-white hover:bg-white/5 transition-all">
+        Academics
+      </a>
+      <a href="/#skills" class="px-3 py-1.5 rounded-lg hover:text-white hover:bg-white/5 transition-all">
+        Skills
+      </a>
+      <a href="/#experience" class="px-3 py-1.5 rounded-lg hover:text-white hover:bg-white/5 transition-all">
+        Experience
+      </a>
+      <a href="/#contact" class="px-3 py-1.5 rounded-lg hover:text-white hover:bg-white/5 transition-all">
+        Contact
+      </a>
+    </nav>
+
+    <!-- Right Action Items -->
+    <div class="flex items-center gap-2.5">
+      <a
+        href="/resume.pdf"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="hidden sm:inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white shadow-md shadow-blue-500/20 hover:shadow-blue-500/35 transition-all duration-200"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="7 10 12 15 17 10"/>
+          <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+        <span>Resume</span>
+      </a>
+
+      <!-- Theme Switcher Island -->
+      <ThemeToggle client:load />
+
+      <!-- Mobile Menu Button -->
+      <button
+        id="mobile-menu-btn"
+        aria-label="Open Navigation Menu"
+        class="md:hidden p-2 rounded-xl border border-white/10 bg-white/5 text-neutral-300 hover:text-white cursor-pointer"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Dropdown Navigation -->
+  <div id="mobile-menu" class="hidden md:hidden border-t border-white/10 bg-[#090a0f]/95 backdrop-blur-xl px-4 py-4 space-y-2">
+    <a href="/#projects" class="block px-3 py-2 rounded-lg text-sm text-neutral-200 hover:bg-white/10">Projects</a>
+    <a href="/projects" class="block px-3 py-2 rounded-lg text-sm text-blue-400 hover:bg-white/10">All Repositories</a>
+    <a href="/#academics" class="block px-3 py-2 rounded-lg text-sm text-neutral-200 hover:bg-white/10">Academics & Research</a>
+    <a href="/#skills" class="block px-3 py-2 rounded-lg text-sm text-neutral-200 hover:bg-white/10">Skills Matrix</a>
+    <a href="/#experience" class="block px-3 py-2 rounded-lg text-sm text-neutral-200 hover:bg-white/10">Experience & Journey</a>
+    <a href="/#contact" class="block px-3 py-2 rounded-lg text-sm text-neutral-200 hover:bg-white/10">Contact</a>
+    <a href="/resume.pdf" target="_blank" class="block px-3 py-2 rounded-lg text-sm text-emerald-400 font-semibold hover:bg-white/10">
+      📄 Download Resume (PDF)
+    </a>
+  </div>
+</header>
+
+<script>
+  const btn = document.getElementById("mobile-menu-btn");
+  const menu = document.getElementById("mobile-menu");
+  if (btn && menu) {
+    btn.addEventListener("click", () => {
+      menu.classList.toggle("hidden");
+    });
+    // Close menu when clicking links
+    menu.querySelectorAll("a").forEach((a) => {
+      a.addEventListener("click", () => {
+        menu.classList.add("hidden");
+      });
+    });
+  }
+</script>

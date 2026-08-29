@@ -1,0 +1,30 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import RepoFilterGrid from "../../components/RepoFilterGrid";
+import { getGitHubData } from "../../lib/github";
+
+const data = await getGitHubData();
+---
+
+<BaseLayout
+  title="All Projects & Open Source Repositories — Md. Iftakhar Awal Chowdhury"
+  description="Explore all public open source repositories, systems tools, desktop applications, and machine learning projects created by Md. Iftakhar Awal Chowdhury (@AtifChy)."
+>
+  <div class="py-8 sm:py-12">
+    <!-- Header -->
+    <div class="space-y-3 mb-8">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono bg-blue-500/10 text-blue-400 border border-blue-500/20">
+        📦 REPOSITORY CATALOG
+      </div>
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-white tracking-tight">
+        Open Source &amp; Projects
+      </h1>
+      <p class="text-neutral-300 text-sm sm:text-base max-w-2xl leading-relaxed">
+        A real-time searchable index of all open-source libraries, desktop applications, CLI daemons, and system configurations fetched directly from the GitHub REST API.
+      </p>
+    </div>
+
+    <!-- Live Client Filter Island -->
+    <RepoFilterGrid client:load initialRepos={data.repos} />
+  </div>
+</BaseLayout>

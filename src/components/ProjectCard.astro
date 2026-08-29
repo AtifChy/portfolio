@@ -1,0 +1,146 @@
+---
+import TechBadge from "./TechBadge.astro";
+
+interface Props {
+  title: string;
+  tagline: string;
+  description: string;
+  category: string;
+  period: string;
+  stack: string[];
+  slug?: string;
+  githubUrl?: string;
+  liveUrl?: string;
+  stars?: number;
+  stats?: Record<string, string>;
+  featured?: boolean;
+}
+
+const {
+  title,
+  tagline,
+  description,
+  category,
+  // period,
+  stack,
+  slug,
+  githubUrl,
+  liveUrl,
+  stars,
+  stats,
+  featured = false,
+} = Astro.props;
+---
+
+<div
+  class={`glass-panel rounded-2xl p-6 sm:p-7 flex flex-col justify-between relative overflow-hidden group border border-white/10 hover:border-blue-500/40 transition-all duration-300 ${
+    featured ? "lg:col-span-2" : ""
+  }`}
+>
+  <!-- Ambient background glow -->
+  <div class="absolute -top-24 -right-24 w-48 h-48 bg-linear-to-br from-blue-600/10 to-indigo-600/10 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-500 pointer-events-none"></div>
+
+  <div>
+    <!-- Top Metadata Header -->
+    <div class="flex items-center justify-between gap-3 mb-3 text-xs font-mono">
+      <div class="flex items-center gap-2">
+        <span class="px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20 font-medium">
+          {category}
+        </span>
+        <!-- <span class="text-neutral-400 hidden sm:inline">• {period}</span> -->
+      </div>
+
+      {typeof stars === "number" && stars > 0 && (
+        <span class="flex items-center gap-1 text-amber-400 bg-amber-400/10 px-2 py-0.5 rounded-md border border-amber-400/20">
+          ★ {stars}
+        </span>
+      )}
+    </div>
+
+    <!-- Title & Tagline -->
+    <h3 class="text-xl sm:text-2xl font-bold font-serif text-white group-hover:text-blue-300 transition-colors mb-1.5">
+      {slug ? (
+        <a href={`/projects/${slug}`} class="hover:underline flex items-center gap-2">
+          {title}
+        </a>
+      ) : (
+        title
+      )}
+    </h3>
+
+    <p class="text-xs font-mono text-blue-400/90 mb-3">
+      {tagline}
+    </p>
+
+    <!-- Description -->
+    <p class="text-sm text-neutral-400 leading-relaxed mb-5 line-clamp-3">
+      {description}
+    </p>
+
+    <!-- Project Metrics Grid (if available) -->
+    {stats && Object.keys(stats).length > 0 && (
+      <div class="grid grid-cols-2 gap-2 p-3 rounded-xl bg-white/3 border border-white/5 mb-5 text-xs font-mono">
+        {Object.entries(stats).slice(0, 4).map(([key, val]) => (
+          <div>
+            <span class="text-neutral-400 block text-[10px] uppercase">{key}</span>
+            <span class="text-neutral-200 font-semibold">{val}</span>
+          </div>
+        ))}
+      </div>
+    )}
+
+    <!-- Tech Stack Tags -->
+    <div class="flex flex-wrap gap-1.5 mb-6">
+      {stack.map((tech) => (
+        <TechBadge name={tech} size="sm" />
+      ))}
+    </div>
+  </div>
+
+  <!-- Bottom CTA Actions -->
+  <div class="flex items-center justify-between pt-4 border-t border-white/5 mt-auto text-xs font-medium">
+    <div class="flex items-center gap-3">
+      {githubUrl && (
+        <a
+          href={githubUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex items-center gap-1 text-neutral-300 hover:text-white transition-colors"
+          title="View Source on GitHub"
+        >
+          <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+          </svg>
+          <span>Source</span>
+        </a>
+      )}
+
+      {liveUrl && (
+        <a
+          href={liveUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex items-center gap-1 text-emerald-400 hover:text-emerald-300 transition-colors"
+          title="Open Live Application"
+        >
+          <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+            <polyline points="15 3 21 3 21 9"/>
+            <line x1="10" y1="14" x2="21" y2="3"/>
+          </svg>
+          <span>Live App</span>
+        </a>
+      )}
+    </div>
+
+    {slug && (
+      <a
+        href={`/projects/${slug}`}
+        class="inline-flex items-center gap-1 text-blue-400 group-hover:text-blue-300 font-mono text-xs font-semibold"
+      >
+        <span>Case Study</span>
+        <span class="group-hover:translate-x-0.5 transition-transform">→</span>
+      </a>
+    )}
+  </div>
+</div>

@@ -1,0 +1,87 @@
+---
+const coursework = [
+  "Operating Systems",
+  "Data Structures & Algorithms",
+  "Object Oriented Programming",
+  "Artificial Intelligence",
+  "Machine Learning",
+  "Computer Networks",
+  "Database Management Systems",
+  "Compiler Design",
+  "Software Engineering",
+];
+---
+
+<div class="glass-panel rounded-3xl p-6 sm:p-8 lg:p-10 relative overflow-hidden border border-white/10 my-8">
+  <div class="absolute -bottom-20 -left-20 w-60 h-60 bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
+
+  <div class="flex flex-col lg:flex-row gap-8 items-start justify-between">
+    <!-- Left Column: Degree & Academic Highlights -->
+    <div class="lg:max-w-xl space-y-4">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono bg-blue-500/10 text-blue-400 border border-blue-500/20">
+        🎓 ACADEMIC EXCELLENCE
+      </div>
+
+      <h3 class="text-2xl sm:text-3xl font-bold font-serif text-white">
+        American International University-Bangladesh
+      </h3>
+
+      <div class="flex flex-wrap items-center gap-3 text-sm">
+        <span class="text-neutral-200 font-medium">B.Sc. in Computer Science & Engineering</span>
+        <span class="text-neutral-400">•</span>
+        <span class="text-neutral-400 font-mono">2023 – Present</span>
+      </div>
+
+      <p class="text-sm text-neutral-400 leading-relaxed">
+        Maintaining strong academic distinction with a focus on systems programming, concurrent software architectures, artificial intelligence, and applied machine learning.
+      </p>
+
+      <!-- Key Coursework -->
+      <div class="pt-2">
+        <span class="text-xs font-mono text-neutral-400 block mb-2">
+          CORE COURSEWORK & DOMAINS:
+        </span>
+        <div class="flex flex-wrap gap-1.5">
+          {coursework.map((course) => (
+            <span class="px-2.5 py-1 rounded-lg text-xs font-mono bg-white/5 border border-white/10 text-neutral-300">
+              {course}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column: Metric Badges & Pre-University -->
+    <div class="w-full lg:w-72 space-y-4 shrink-0">
+      <!-- CGPA Highlight Card -->
+      <div class="glass-panel rounded-2xl p-5 border border-blue-500/30 bg-gradient-to-br from-blue-900/20 via-transparent to-transparent">
+        <div class="flex items-center justify-between text-xs font-mono text-blue-400 mb-1">
+          <span>UNDERGRAD CGPA</span>
+          <span class="text-emerald-400">Distinction</span>
+        </div>
+        <div class="flex items-baseline gap-2">
+          <span class="text-4xl font-bold font-serif text-white tracking-tight">3.83</span>
+          <span class="text-sm font-mono text-neutral-400">/ 4.00</span>
+        </div>
+        <p class="text-xs text-neutral-400 mt-2">
+          Top-tier standing across all major CSE core engineering modules.
+        </p>
+      </div>
+
+      <!-- Higher Secondary Certificate Card -->
+      <div class="glass-panel rounded-2xl p-4 border border-white/10">
+        <div class="flex items-center justify-between text-xs font-mono text-neutral-400 mb-1">
+          <span>SCHOLARSHOME</span>
+          <span class="text-amber-400">HSC Exam</span>
+        </div>
+        <div class="flex items-baseline gap-2">
+          <span class="text-2xl font-bold font-serif text-white">5.00</span>
+          <span class="text-xs font-mono text-neutral-400">/ 5.00 GPA</span>
+        </div>
+        <p class="text-[11px] text-neutral-400 mt-1">
+          Higher School Certificate (Science) — Sylhet, Bangladesh
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
